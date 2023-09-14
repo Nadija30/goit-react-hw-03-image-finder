@@ -10,13 +10,13 @@ export class Searchbar extends Component {
   };
 
   handleChange = ({ target: { value } }) => {
-    this.setState({ value });
+    this.setState({ value }).toLowerCase().trim();
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.value.trim() === '') {
-      toast.info('Введіть дані для пошуку');
+    if (this.state.value === '') {
+      toast.info('Введіть свій запит, будь ласка!');
       return;
     }
     this.props.onSubmit(this.state.value);
