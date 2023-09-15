@@ -10,12 +10,12 @@ export class Searchbar extends Component {
   };
 
   handleChange = ({ target: { value } }) => {
-    this.setState({ value }).toLowerCase().trim();
+    this.setState({ value });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.value === '') {
+    if (this.state.value.trim() === '') {
       toast.info('Введіть свій запит, будь ласка!');
       return;
     }
@@ -38,11 +38,11 @@ export class Searchbar extends Component {
             type="text"
             onChange={this.handleChange}
             value={value}
-            autocomplete="off"
-            autofocus
+            autoComplete="off"
+            autoFocus
             placeholder="Search images and photos"
           />
-          <button type="submit" class={css.form_button}>
+          <button type="submit" className={css.form_button}>
             <span>Search</span>
           </button>
         </form>

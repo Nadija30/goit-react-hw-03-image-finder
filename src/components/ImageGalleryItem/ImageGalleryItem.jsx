@@ -12,10 +12,3 @@ export const ImageGalleryItem = ({ id, smallUrl, tags }) => {
     </li>
   );
 };
-
-// ImageGalleryItem.propTypes = {
-//   id: PropTypes.number.isRequired,
-//   webformatURL: PropTypes.string.isRequired,
-//   tags: PropTypes.string.isRequired,
-//   // onClickImageItem: PropTypes.func.isRequired,
-// };
