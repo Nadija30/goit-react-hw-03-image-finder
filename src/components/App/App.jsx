@@ -31,7 +31,7 @@ export class App extends Component {
   addPhotoPage = (photoName, page) => {
     this.setState({ loading: true });
 
-    searchPhoto = (photoName, page, perPage)
+    searchPhoto(photoName, page, perPage)
       .then(data => {
         const { totalHits } = data;
         const totalPage = Math.ceil(data.totalHits / perPage);
