@@ -90,17 +90,12 @@ export class App extends Component {
     this.setState(prev => ({ page: prev.page + 1 }));
   };
 
-  toggleModal = () => {
-    this.setState(state => ({ showModal: !state.showModal }));
+  onClickOpenModal = selectedPhoto => {
+    this.setState({ selectedPhoto, showModal: true });
   };
 
-  onClickOpenModal = event => {
-    const { photos } = this.state;
-    const imageId = event.target.getAttribute('data-id');
-    const selectedPhoto = photos.find(photo => photo.id === Number(imageId));
-    console.log(selectedPhoto);
-    this.setState({ selectedPhoto });
-    this.toggleModal();
+  closeModal = () => {
+    this.setState({ selectedPhoto: null, showModal: false });
   };
 
   render() {
@@ -115,7 +110,7 @@ export class App extends Component {
           <Button onClickRender={this.onClickRender} />
         )}
         {showModal && (
-          <Modal selectedPhoto={selectedPhoto} onClose={this.toggleModal} />
+          <Modal selectedPhoto={selectedPhoto} onClose={this.closeModal} />
         )}
         <ToastContainer autoClose={3000} />
       </div>
