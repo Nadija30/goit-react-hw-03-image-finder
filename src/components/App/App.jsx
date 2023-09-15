@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { ImageGalery } from '../ImageGallery/ImageGallery';
 import { Button } from '../Button/Button';
 import { Modal } from '../Modal/Modal';
+import { Loader } from '../Loader/Loader';
 import 'react-toastify/dist/ReactToastify.css';
 import css from './App.module.css';
 
@@ -73,6 +74,10 @@ export class App extends Component {
   }
 
   onSubmitForm = value => {
+    if (value === this.state.photoName) {
+      toast.info('Будь ласка, введіть новий запит!');
+      return;
+    }
     this.setState({
       photoName: value,
       page: 1,
@@ -104,7 +109,7 @@ export class App extends Component {
     return (
       <div className={css.app}>
         <Searchbar onSubmit={this.onSubmitForm} />
-        {isloading && <h1>Loading...</h1>}
+        {isloading && <Loader />}
         <ImageGalery photos={photos} onClickImageItem={this.onClickOpenModal} />
         {photos.length !== 0 && btnLoadMore && (
           <Button onClickRender={this.onClickRender} />
