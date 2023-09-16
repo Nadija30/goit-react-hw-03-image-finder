@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { Searchbar } from '../Searchbar/Searchbar';
 import { ToastContainer } from 'react-toastify';
 import { searchPhoto } from '../ImageInfo/image';
@@ -17,7 +17,6 @@ export class App extends Component {
     photoName: '',
     page: 1,
     btnLoadMore: false,
-    showModal: false,
     selectedPhoto: null,
   };
 
@@ -90,27 +89,21 @@ export class App extends Component {
     this.setState(prev => ({ page: prev.page + 1 }));
   };
 
-  onClickOpenModal = selectedPhoto => {
-    this.setState({ selectedPhoto, showModal: true });
+  toggleModal = (selectedPhoto = null) => {
+    this.setState({ selectedPhoto });
   };
-
-  closeModal = () => {
-    this.setState({ selectedPhoto: null, showModal: false });
-  };
-
   render() {
-    const { isloading, photos, btnLoadMore, selectedPhoto, showModal } =
-      this.state;
+    const { isloading, photos, btnLoadMore, selectedPhoto } = this.state;
     return (
       <div className={css.app}>
         <Searchbar onSubmit={this.onSubmitForm} />
         {isloading && <Loader />}
-        <ImageGalery photos={photos} onClickImageItem={this.onClickOpenModal} />
+        <ImageGalery photos={photos} onClickImageItem={this.toggleModal} />
         {photos.length !== 0 && btnLoadMore && (
           <Button onClickRender={this.onClickRender} />
         )}
-        {showModal && (
-          <Modal selectedPhoto={selectedPhoto} onClose={this.closeModal} />
+        {selectedPhoto && (
+          <Modal selectedPhoto={selectedPhoto} onClose={this.toggleModal} />
         )}
         <ToastContainer autoClose={3000} />
       </div>
